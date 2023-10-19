@@ -1,0 +1,108 @@
+package escola;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Principal {
+  public static void main(String[] args) {
+    int i = 0;
+    float f = 9.9f;
+    double d = 11.9;
+    char c = 'a';
+    boolean b = true;
+    String s = "Hello World!";
+    float div = 10;
+
+    f = 2.7575757f;
+
+    for (int j = 0; j < 10; j++) {
+      System.out.println("j = " + j);
+
+      f = f * 2;
+
+    }
+
+    System.out.println("i = " + i);
+    System.out.println("f = " + f);
+    System.out.println("d = " + d);
+    System.out.println("c = " + c);
+    System.out.println("b = " + b);
+    System.out.println("s = " + s);
+
+    div = div / 3;
+
+    System.out.println("div = " + div);
+    d = 10;
+    d = d / 3;
+    System.out.println("d = " + d);
+    // printf
+    System.out.printf("d = %.2f\n", d);
+
+    String nome = "João";
+    String sobrenome = "da Silva";
+    String nomeCompleto = nome + " " + sobrenome;
+
+    System.out.println("nomeCompleto = " + nomeCompleto);
+
+    {
+      // create a file
+      File arquivo = new File("Nome.txt");
+      try {
+        arquivo.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      // write to file
+      try {
+        FileWriter writer = new FileWriter(arquivo);
+        writer.write(nomeCompleto);
+        writer.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    Disciplina disciplina = new Disciplina();
+    // print disciplina
+    System.out.println("Disciplina: " + disciplina.getNome());
+    disciplina.setNome("Programação Orientada a Objetos");
+    disciplina.setSigla("POB");
+    disciplina.setPeriodo(3);
+    System.out.println("Disciplina: " + disciplina.getNome() +
+        "\nSigla: " + disciplina.getSigla() +
+        "\nPeriodo: " + disciplina.getPeriodo());
+
+    {
+      int cont = 0;
+      while (cont < 10) {
+        // receive values in console
+        System.out.println("Digite o nome da disciplina: ");
+        disciplina.setNome(System.console().readLine());
+        System.out.println("Digite a sigla da disciplina: ");
+        disciplina.setSigla(System.console().readLine());
+        System.out.println("Digite o periodo da disciplina: ");
+        disciplina.setPeriodo(Integer.parseInt(System.console().readLine()));
+
+        // create a file
+        File arquivoDisciplina = new File("Disciplina" + cont + ".txt");
+        try {
+          arquivoDisciplina.createNewFile();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        // write to file
+        try {
+          FileWriter writer = new FileWriter(arquivoDisciplina);
+          writer.write("Disciplina: " + disciplina.getNome() +
+              "\nSigla: " + disciplina.getSigla() +
+              "\nPeriodo: " + disciplina.getPeriodo());
+          writer.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        cont++;
+      }
+    }
+  }
+}
